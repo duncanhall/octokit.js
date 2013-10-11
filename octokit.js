@@ -530,6 +530,14 @@
                 });
               }).promise();
             };
+            this.getContents = function(path) {
+              var _this = this;
+              return _request('GET', "" + _repoPath + "/contents/" + path, null, {
+                raw: true
+              }).then(function(contents) {
+                return contents;
+              }).promise();
+            };
             this.getTree = function(tree, options) {
               var queryString,
                 _this = this;
@@ -667,6 +675,14 @@
                       content: bytes
                     };
                   });
+                });
+              }).promise();
+            };
+            this.contents = function(path) {
+              var _this = this;
+              return _getRef().then(function(branch) {
+                return _git.getContents(path).then(function(contents) {
+                  return contents;
                 });
               }).promise();
             };
